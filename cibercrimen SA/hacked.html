@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM BREACH</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        body {
+            background-color: #000;
+            color: #00ff41;
+            font-family: 'Share Tech Mono', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .terminal {
+            width: 90%;
+            max-width: 800px;
+        }
+        .line {
+            white-space: pre-wrap;
+            margin-bottom: 12px;
+        }
+        .prompt {
+            color: #ff0000;
+        }
+        .message {
+            color: #000;
+            background-color: #00ff41;
+            padding: 12px;
+            border: 2px solid #000;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal" id="terminal">
+        <div class="line">root@localhost:~# Iniciando conexión...</div>
+        <div class="line">root@localhost:~# Intentando evadir firewall... Éxito.</div>
+        <div class="line">root@localhost:~# Obteniendo acceso al dispositivo...</div>
+    </div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        const lines = [
+            { text: 'root@localhost:~# ACCESO CONCEDIDO.', delay: 1000 },
+            { text: 'root@localhost:~# Tu curiosidad te trajo aquí.', delay: 1500 },
+            { text: '<br>', delay: 500 },
+            { text: '> No te asustes, tu dispositivo está a salvo... por ahora.', delay: 1500, prompt: true },
+            { text: '> Acabas de escanear un código QR sin conocer su destino.', delay: 2000, prompt: true },
+            { text: '> Así de fácil es dirigir a alguien a un sitio malicioso para robar datos o instalar malware.', delay: 3000, prompt: true },
+            { text: '<br>', delay: 500 },
+            { text: 'LA LECCIÓN: No escanees códigos QR de fuentes no confiables. Verifica siempre antes de escanear.', delay: 3000, final: true }
+        ];
+
+        let totalDelay = 0;
+        lines.forEach(line => {
+            totalDelay += line.delay;
+            setTimeout(() => {
+                const newLine = document.createElement('div');
+                newLine.classList.add('line');
+                if(line.prompt) newLine.classList.add('prompt');
+                if(line.final) newLine.classList.add('message');
+                newLine.innerHTML = line.text;
+                terminal.appendChild(newLine);
+                window.scrollTo(0, document.body.scrollHeight);
+            }, totalDelay);
+        });
+    </script>
+
+</body>
+</html>
